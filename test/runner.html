@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>test Runner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .hide {
+        display: none;
+    }
+    div#out {
+        width: 70%;
+        margin-top: 52px;
+        margin-left: 15%;
+        height: 500px;
+        background:black;
+        color: #83f1a1;
+        font-size: large;
+        padding: 20px;
+        overflow: auto;
+    }
+    .semi {
+        color: #e26464;
+    }
+    .pass {
+        color: #42b300;
+    }
+    .fail  {
+        color: #ff1a1a;
+    }
+    </style>
+</head>
+<body>
+    <div id="out"></div>
+    <script>
+    let count = 1
+    function log(x,status) { 
+        let p = document.createElement('p')
+        p.innerText = `${x}`
+        p.className =  status
+        document.getElementById('out').appendChild(p)
+    }
+
+    function assert(testname ,var1 , var2 ){
+        if(typeof(var1) == 'object') var1 = var1.toString()
+        if(typeof(var2) == 'object') var2 = var2.toString()
+        if (var1 === var2 ) log(`${count} : ${ testname } : pass`,'pass')
+        else if(var1 == var2){ 
+            log(`${count} : ${testname } : failed:values are equal but not datatypes`,'semi')
+        }else{
+            log(`${count} : ${testname } : failed. \n expected : ${var1} \n output : ${var2}`,'fail')
+        }
+        count += 1
+    }
+    </script>
+</body>
+</html>
